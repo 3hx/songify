@@ -1,5 +1,6 @@
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -54,7 +55,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-gray-800 flex gap-4 text-center items-center">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="Songify Logo" className="h-8" />
+            <Image src="/logo.png" alt="Songify Logo" width={32} height={32} />
             <span className="font-bold text-lg">Songify</span>
           </div>
           <p>© 2024 Bill. All rights reserved.</p>

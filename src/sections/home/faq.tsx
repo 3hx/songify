@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 const FAQ_ITEMS = [
   {
@@ -38,13 +39,16 @@ export function FAQ() {
     <section className="py-16 px-4">
       <div className="container pt-12 pb-0 tablet:pb-8">
         <h2 className="mb-14 text-3xl font-bold text-center mb-8mb-8 max-w-700 mx-auto max-w-2xl">
-          Join hundreds of thousands who've already discovered the magic of Bill
+          Join hundreds of thousands who&apos;ve already discovered the magic of
+          Bill
         </h2>
         <div className="mb-8 tablet:mb-10 text-center">
-          <img
-            src="https://content.songfinch.com/res/songfinch/image/upload/content-files/npgzvvmpxot4gq04dyfz/1702997226.png?format=auto"
+          <Image
+            src="/union.avif"
             className="inline-block"
             alt="icons"
+            width={300}
+            height={72}
           />
         </div>
         <div className="mt-12">

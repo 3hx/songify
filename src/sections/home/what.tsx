@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
 
 const What = () => {
   return (
@@ -15,8 +17,8 @@ const What = () => {
             What is a custom song?
           </h2>
           <p className="text-2xl text-gray-700 mb-8">
-            It's a one-of-a-kind, radio-quality song created for you based on
-            your stories, memories, and ideas. Our community of the best
+            It&apos;s a one-of-a-kind, radio-quality song created for you based
+            on your stories, memories, and ideas. Our community of the best
             singers, songwriters, and musical talent will write and record your
             custom song in 7 days or less.
           </p>
@@ -28,13 +30,14 @@ const What = () => {
             className="videoPlayer cursor-pointer"
             href="#"
             aria-label="play video how it works?"
-            aria-modal="false"
           >
             <div className="relative">
-              <img
+              <Image
                 className="w-[615px] m-auto rounded-lg shadow-lg"
                 alt="play video how it works?"
-                src="https://content.songfinch.com/res/songfinch/image/upload/content-files/inuirdwfzwg1fmtpbl9o/1703071620.jpg?format=auto&width=615"
+                src="/what.avif"
+                width={615}
+                height={615}
               />
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <svg
@@ -65,21 +68,21 @@ const What = () => {
         </div>
 
         <p className="text-2xl text-gray-700 mb-8">
-          It's easy to get started. In a few short steps, you'll be on your way
-          to a radio-quality custom song.
+          It&apos;s easy to get started. In a few short steps, you&apos;ll be on
+          your way to a radio-quality custom song.
         </p>
 
         <div className="space-y-4">
           <Button variant="default" asChild>
-            <a href="/song-builder">START YOUR SONG</a>
+            <Link href="/song-builder">START YOUR SONG</Link>
           </Button>
           <div>
-            <a
+            <Link
               href="/learn-more"
               className="inline-block text-gray-800 font-semibold hover:text-primary transition-colors text-sm tracking-wider"
             >
               LEARN MORE
-            </a>
+            </Link>
           </div>
         </div>
       </div>

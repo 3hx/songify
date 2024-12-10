@@ -10,6 +10,7 @@ import { Slide } from "@/sections/home/reviews/data";
 import { Card } from "@/components/ui/Card";
 import { LucideStar } from "lucide-react";
 import parse from "html-react-parser";
+import Image from "next/image";
 
 const Slideshow: React.FC<{ slide: Slide }> = ({
   slide: { lyrics, requirements, review, video },
@@ -36,11 +37,13 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
           >
             <div className="whitespace-pre-line">
               {parse(requirements.text, {
-                replace: (node: any) => {
-                  if (node.name === "strong") {
+                replace: (node) => {
+                  if (node.type === "tag" && node.name === "strong") {
                     return (
                       <strong className="font-bold text-[#262420]">
-                        {node.children[0].data}
+                        {node.children[0].type === "text"
+                          ? node.children[0].data
+                          : ""}
                       </strong>
                     );
                   }
@@ -55,10 +58,7 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
             className={`text-stone-600 bg-cover bg-center text-4xl font-extrabold text-left p-6 relative`}
           >
             <div className="bg-black/30 p-3 rounded-xl absolute top-6 right-6">
-              <img
-                src="https://content.songfinch.com/static/customer/home/union.png?format=auto"
-                alt="play icon"
-              />
+              <Image src="/note.avif" alt="play icon" width={24} height={24} />
             </div>
             <div className="whitespace-normal max-w-[75%] italic">
               {parse(
@@ -70,7 +70,7 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
                   })
                   .join(""),
                 {
-                  replace: (node: any) => {
+                  replace: (node) => {
                     if (node.type === "text") {
                       return node.data;
                     }
@@ -133,7 +133,9 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
                 />
               ))}
             </div>
-            <div className="mt-8 px-4 text-[#262420] italic">"{review}"</div>
+            <div className="mt-8 px-4 text-[#262420] italic">
+              &ldquo;{review}&rdquo;
+            </div>
           </Card>
         </CarouselItem>
       </CarouselContent>

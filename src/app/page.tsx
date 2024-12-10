@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Hero from "@/sections/home/hero";
 import What from "@/sections/home/what";
 import Reviews from "@/sections/home/reviews/index";

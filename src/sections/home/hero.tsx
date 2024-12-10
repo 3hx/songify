@@ -29,7 +29,8 @@ const Hero = () => {
         <div className="absolute inset-x-0 -bottom-24 flex items-center justify-center z-20">
           <div className="max-w-[800px] mx-auto px-2.5 text-gray-900">
             <h1 className="text-4xl md:text-6xl font-extrabold mb-2.5 [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
-              <span className="text-white">Create a moment that's</span> <br />
+              <span className="text-white">Create a moment that&apos;s</span>{" "}
+              <br />
               truly unforgettable
             </h1>
             <p className="text-lg md:text-2xl mb-3 text-gray-800">
