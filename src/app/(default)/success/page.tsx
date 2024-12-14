@@ -1,12 +1,12 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useStore } from "@/stores/song/useSongStore";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export default function Success() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const resetSong = useStore((state) => state.resetSong);
   const sessionId = searchParams.get("session_id");
@@ -37,5 +37,13 @@ export default function Success() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Success() {
+  return (
+    <Suspense>
+      <SuccessContent />
+    </Suspense>
   );
 }
