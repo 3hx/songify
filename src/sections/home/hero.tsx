@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { CTA } from "@/components/ui/button";
 
 const Hero = () => {
   return (
@@ -29,17 +29,13 @@ const Hero = () => {
         <div className="absolute inset-x-0 -bottom-24 flex items-center justify-center z-20">
           <div className="max-w-[800px] mx-auto px-2.5 text-gray-900">
             <h1 className="text-4xl md:text-6xl font-extrabold mb-2.5 [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
-              <span className="text-white">Create a moment that&apos;s</span>{" "}
-              <br />
-              truly unforgettable
+              <span className="text-white">Make memories that</span> <br />
+              last a lifetime
             </h1>
             <p className="text-lg md:text-2xl mb-3 text-gray-800">
-              Share your love with a one-of-a-kind custom song, created by a
-              professional musician.
+              Express your love with a unique, custom-made song created by us.
             </p>
-            <Button className="mt-6" variant="default" asChild>
-              <a href="/song-builder">Start Your Song</a>
-            </Button>
+            <CTA />
           </div>
         </div>
       </div>

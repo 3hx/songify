@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { CTA } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -17,10 +17,9 @@ const What = () => {
             What is a custom song?
           </h2>
           <p className="text-2xl text-gray-700 mb-8">
-            It&apos;s a one-of-a-kind, radio-quality song created for you based
-            on your stories, memories, and ideas. Our community of the best
-            singers, songwriters, and musical talent will write and record your
-            custom song in 7 days or less.
+            Get a unique, radio-quality song made just for you, inspired by your
+            stories, memories, and ideas. We&apos;ll write and produce your
+            personalized song in 4 days or less.
           </p>
         </div>
 
@@ -73,9 +72,7 @@ const What = () => {
         </p>
 
         <div className="space-y-4">
-          <Button variant="default" asChild>
-            <Link href="/song-builder">START YOUR SONG</Link>
-          </Button>
+          <CTA />
           <div>
             <Link
               href="/learn-more"

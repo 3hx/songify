@@ -1,0 +1,29 @@
+{
+  "exportall.config.folderListener": ["/src/stores/song"],
+  "files.exclude": {
+    "node_modules": true,
+    ".pnp": true,
+    "**/.pnp.*": true,
+    ".yarn/*": true,
+    ".yarn/patches": false,
+    ".yarn/plugins": false,
+    ".yarn/releases": false,
+    ".yarn/versions": false,
+    "coverage": true,
+    ".next/": true,
+    "out/": true,
+    "build": true,
+    "**/.DS_Store": true,
+    "**/*.pem": true,
+    "**/npm-debug.log*": true,
+    "**/yarn-debug.log*": true,
+    "**/yarn-error.log*": true,
+    "**/.env*": true,
+    "**/.vercel": true,
+    "**/*.tsbuildinfo": true,
+    "**/next-env.d.ts": true,
+    "supabase/**/.branches": true,
+    "supabase/**/.temp": true,
+    "supabase/**/.env": true
+  }
+}

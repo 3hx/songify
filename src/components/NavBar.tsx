@@ -4,7 +4,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
+import { CTA } from "@/components/ui/button";
 import { ShoppingCart, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
@@ -92,11 +92,7 @@ const NavBar = () => {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        {0 === 0 && (
-          <Button variant="default" asChild>
-            <Link href="/song-builder">Start Your Song</Link>
-          </Button>
-        )}
+        {0 === 0 && <CTA />}
       </div>
 
       {/* Mobile Navigation */}
@@ -159,11 +155,7 @@ const NavBar = () => {
               >
                 Login
               </Link>
-              {0 === 0 && (
-                <Button variant="default" asChild>
-                  <Link href="/song-builder">Start Your Song</Link>
-                </Button>
-              )}
+              {0 === 0 && <CTA />}
             </div>
           </SheetContent>
         </Sheet>

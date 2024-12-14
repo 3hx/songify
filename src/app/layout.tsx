@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import { Footer } from "@/components/Footer";
-import AnnouncementBanner from "@/components/AnnouncementBanner";
 import localFont from "next/font/local";
 
 const national = localFont({
@@ -45,16 +42,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${national.variable} antialiased min-h-screen overflow-x-hidden`}
+        className={`${national.variable} antialiased h-screen overflow-x-hidden`}
       >
-        <div className="min-h-screen">
-          <AnnouncementBanner />
-          <div className="max-w-6xl mx-auto">
-            <NavBar />
-            {children}
-          </div>
-        </div>
-        <Footer />
+        <main className="w-full h-full">{children}</main>
       </body>
     </html>
   );

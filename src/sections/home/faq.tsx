@@ -6,7 +6,12 @@ import {
 } from "@/components/ui/accordion";
 import Image from "next/image";
 
-const FAQ_ITEMS = [
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const FAQ_ITEMS: FAQItem[] = [
   {
     question: "How long does my custom song take?",
     answer:
@@ -38,7 +43,7 @@ export function FAQ() {
   return (
     <section className="py-16 px-4">
       <div className="container pt-12 pb-0 tablet:pb-8">
-        <h2 className="mb-14 text-3xl font-bold text-center mb-8mb-8 max-w-700 mx-auto max-w-2xl">
+        <h2 className="text-3xl font-bold text-center mb-8 max-w-700 mx-auto max-w-2xl">
           Join hundreds of thousands who&apos;ve already discovered the magic of
           Bill
         </h2>
@@ -50,11 +55,6 @@ export function FAQ() {
             width={300}
             height={72}
           />
-        </div>
-        <div className="mt-12">
-          <div>
-            <div className=""></div>
-          </div>
         </div>
       </div>
       <div className="max-w-3xl mx-auto">

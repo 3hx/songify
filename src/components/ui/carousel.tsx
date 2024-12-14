@@ -21,6 +21,8 @@ type CarouselProps = {
   setApi?: (api: CarouselApi) => void;
 };
 
+type CarouselDotsProps = React.HTMLAttributes<HTMLDivElement>;
+
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   api: ReturnType<typeof useEmblaCarousel>[1];
@@ -28,6 +30,8 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
+  numberOfSlides?: number;
+  currentSlide?: number;
 } & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
@@ -252,6 +256,55 @@ const CarouselNext = React.forwardRef<
 });
 CarouselNext.displayName = "CarouselNext";
 
+const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
+  ({ className, ...props }, ref) => {
+    const { api } = useCarousel();
+    const numberOfSlides = api?.scrollSnapList().length || 0;
+    const currentSlide = api?.selectedScrollSnap() || 0;
+
+    const [, setUpdateState] = React.useState(false);
+    const toggleUpdateState = React.useCallback(
+      () => setUpdateState((prevState) => !prevState),
+      []
+    );
+
+    React.useEffect(() => {
+      if (api) {
+        api.on("select", toggleUpdateState);
+        api.on("reInit", toggleUpdateState);
+
+        return () => {
+          api.off("select", toggleUpdateState);
+          api.off("reInit", toggleUpdateState);
+        };
+      }
+    }, [api, toggleUpdateState]);
+    if (numberOfSlides > 1) {
+      return (
+        <div
+          ref={ref}
+          className={cn("flex justify-center gap-2", className)}
+          {...props}
+        >
+          {Array.from({ length: numberOfSlides }, (_, i) => (
+            <button
+              key={i}
+              className={cn(
+                "h-2 w-2 rounded-full transition-all",
+                i === currentSlide ? "bg-stone-500" : "bg-stone-300"
+              )}
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => api?.scrollTo(i)}
+            />
+          ))}
+        </div>
+      );
+    }
+    return null;
+  }
+);
+CarouselDots.displayName = "CarouselDots";
+
 export {
   type CarouselApi,
   Carousel,
@@ -259,4 +312,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots,
 };
