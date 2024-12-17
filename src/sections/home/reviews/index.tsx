@@ -9,7 +9,7 @@ const Reviews = () => {
   const [activeTag, setActiveTag] = useState<Tag>("My daughter");
 
   return (
-    <section className="-mx-[18rem] bg-white py-24">
+    <section className="bg-white py-24">
       <div className="px-4 text-center">
         <h2 className="text-4xl font-bold mb-4">
           Over 350,000 custom songs created for
@@ -20,7 +20,7 @@ const Reviews = () => {
           through music.
         </p>
 
-        <div className="space-x-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-4 my-8 md:my-16">
           {TAGS.map((text) => (
             <button
               key={text}
@@ -36,7 +36,7 @@ const Reviews = () => {
           ))}
         </div>
 
-        <div className="flex justify-center max-w-8xl mx-auto">
+        <div className="flex justify-center">
           <Slideshow slide={SLIDES[activeTag]} />
         </div>
 

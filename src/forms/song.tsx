@@ -395,7 +395,7 @@ function MultiStepForm() {
                                       <ToggleGroupItem
                                         key={genre}
                                         value={genre}
-                                        className="capitalize rounded-lg border border-stone-300 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] active:scale-[0.98] data-[state=on]:bg-stone-900 data-[state=on]:text-white data-[state=on]:scale-[1.02]"
+                                        className="capitalize rounded-lg border border-stone-200 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] hover:border-stone-400 active:scale-[0.98] data-[state=on]:scale-[1.02] data-[state=on]:bg-stone-900 data-[state=on]:border-stone-900 data-[state=on]:text-white"
                                       >
                                         {genre}
                                       </ToggleGroupItem>
@@ -463,7 +463,7 @@ function MultiStepForm() {
                                           <ToggleGroupItem
                                             key={style}
                                             value={style}
-                                            className="flex-1 capitalize rounded-lg border border-stone-300 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] active:scale-[0.98] data-[state=on]:bg-stone-900 data-[state=on]:text-white data-[state=on]:scale-[1.02]"
+                                            className="flex-1 capitalize rounded-lg border border-stone-200 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] hover:border-stone-400 active:scale-[0.98] data-[state=on]:scale-[1.02] data-[state=on]:bg-stone-900 data-[state=on]:border-stone-900 data-[state=on]:text-white"
                                           >
                                             {style}
                                           </ToggleGroupItem>
@@ -569,7 +569,7 @@ function MultiStepForm() {
                                           <ToggleGroupItem
                                             key={vibe}
                                             value={vibe}
-                                            className="flex-1 min-w-fit capitalize rounded-lg border border-stone-300 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] active:scale-[0.98] data-[state=on]:bg-stone-900 data-[state=on]:text-white data-[state=on]:scale-[1.02]"
+                                            className="flex-1 min-w-fit capitalize rounded-lg border border-stone-200 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] hover:border-stone-400 active:scale-[0.98] data-[state=on]:scale-[1.02] data-[state=on]:bg-stone-900 data-[state=on]:border-stone-900 data-[state=on]:text-white"
                                           >
                                             {vibe}
                                           </ToggleGroupItem>
@@ -667,7 +667,7 @@ function MultiStepForm() {
                                           <ToggleGroupItem
                                             key={tempo}
                                             value={tempo}
-                                            className="flex-1 capitalize rounded-lg border border-stone-300 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] active:scale-[0.98] data-[state=on]:bg-stone-900 data-[state=on]:text-white data-[state=on]:scale-[1.02]"
+                                            className="capitalize rounded-lg border border-stone-200 px-4 py-2 text-sm transition-all duration-300 ease-out transform hover:scale-[1.02] hover:border-stone-400 active:scale-[0.98] data-[state=on]:scale-[1.02] data-[state=on]:bg-stone-900 data-[state=on]:border-stone-900 data-[state=on]:text-white"
                                           >
                                             {tempo}
                                           </ToggleGroupItem>
