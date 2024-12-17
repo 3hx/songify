@@ -3,6 +3,7 @@ import {
   TEMPO_OPTIONS,
   STEPS,
   PROMPT_OPTIONS,
+  DELIVERY_OPTIONS,
 } from "./constants";
 
 export type Song = {
@@ -23,7 +24,7 @@ export type Song = {
     importantContext: string;
   };
   options: {
-    deliveryTime: Date;
+    deliveryTime: (typeof DELIVERY_OPTIONS)[number];
     length: string;
     revisions: number;
   };

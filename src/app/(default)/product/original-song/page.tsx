@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Info, Clock, Music2 } from "lucide-react";
 
-export default function LearnMore() {
+export default function OriginalSong() {
   const router = useRouter();
 
   return (

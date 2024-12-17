@@ -29,7 +29,7 @@ export const storySchema = z.object({
 
 // Billing Step Validation Schema
 export const optionsSchema = z.object({
-  deliveryTime: z.enum(["priority", "normal"]),
+  deliveryTime: z.enum(["normal", "rush"]),
   length: z.string(),
   revisions: z.number().min(0),
 });

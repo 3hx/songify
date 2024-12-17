@@ -4,10 +4,10 @@ const Hero = () => {
   return (
     <section className="text-center relative h-[40rem] w-full">
       <div className="relative h-full">
-        <div className="rounded-t-3xl overflow-hidden h-full">
+        <div className="overflow-hidden h-full">
           <div className="relative h-full">
             <video
-              className="w-full h-full object-cover filter brightness-[1.15]"
+              className="w-full h-full object-cover filter brightness-[1.15] md:rounded-t-3xl max-w-[1250px] mx-auto"
               src="https://content.songfinch.com/res/songfinch/video/upload/content-files/sazugjofghipwtrhxj0e/1701861573.mp4?format=mp4"
               autoPlay
               loop

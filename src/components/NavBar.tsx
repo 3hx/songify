@@ -25,7 +25,7 @@ const NavBar = () => {
           <NavigationMenuList className="gap-8 text-lg">
             <NavigationMenuItem>
               <NavigationMenuLink
-                href="/"
+                href="/product/original-song"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
                 Learn
@@ -42,7 +42,7 @@ const NavBar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink
-                href="/about"
+                href="/#pricing"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
                 Pricing
@@ -50,7 +50,7 @@ const NavBar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink
-                href="/contact"
+                href="/examples"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
                 Examples
@@ -138,13 +138,13 @@ const NavBar = () => {
                 Artists
               </Link>
               <Link
-                href="/about"
+                href="/#pricing"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
                 Pricing
               </Link>
               <Link
-                href="/contact"
+                href="/examples"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
                 Examples

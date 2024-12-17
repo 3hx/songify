@@ -42,8 +42,8 @@ const FAQ_ITEMS: FAQItem[] = [
 export function FAQ() {
   return (
     <section className="py-16 px-4">
-      <div className="container pt-12 pb-0 tablet:pb-8">
-        <h2 className="text-3xl font-bold text-center mb-8 max-w-700 mx-auto max-w-2xl">
+      <div className="pt-12 pb-0 tablet:pb-8">
+        <h2 className="text-3xl font-bold text-center mb-8 max-w-700  mx-auto max-w-2xl">
           Join hundreds of thousands who&apos;ve already discovered the magic of
           Bill
         </h2>
@@ -58,7 +58,7 @@ export function FAQ() {
         </div>
       </div>
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold text-center  mb-8">
           Frequently Asked Questions
         </h2>
         <Accordion type="single" collapsible className="w-full">

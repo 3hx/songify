@@ -13,9 +13,11 @@ export default function DefaultLayout({
   return (
     <>
       <AnnouncementBanner />
-      <div className="max-w-6xl mx-auto">
-        <NavBar />
-        {children}
+      <div className="min-h-[calc(100vh-theme(spacing.16))] flex flex-col">
+        <div className="max-w-6xl mx-auto w-full">
+          <NavBar />
+        </div>
+        <main className="flex-1">{children}</main>
       </div>
       <Footer />
     </>

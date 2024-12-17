@@ -45,6 +45,8 @@ import AutoPlay from "embla-carousel-autoplay";
 import { GENRE_OPTIONS } from "../stores/song/constants";
 import { VOCAL_STYLE_OPTIONS } from "../stores/song/constants";
 import { PROMPT_OPTIONS } from "../stores/song/constants";
+import { AnimatePresence } from "framer-motion";
+import { FormTransition } from "@/components/form/FormTransition";
 
 type StepData = {
   about: Song["about"];
@@ -54,6 +56,8 @@ type StepData = {
 };
 
 type FormFields<T extends keyof StepData> = StepData[T];
+
+type StepId = 0 | 1 | 2 | 3;
 
 function MultiStepForm() {
   const router = useRouter();
@@ -116,383 +120,400 @@ function MultiStepForm() {
                 <h2 className="text-4xl font-bold">{step.title}</h2>
               </div>
 
-              {currentStep === 0 && (
-                <>
-                  <FormField
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Recipient&apos;s Name</FormLabel>
-                        <FormControl>
-                          <Input {...field} placeholder="Name or nickname" />
-                        </FormControl>
-                        <FormDescription>
-                          Enter your name or nickname.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+              <AnimatePresence mode="wait">
+                <FormTransition key={currentStep}>
+                  {currentStep === (0 as StepId) && (
+                    <>
+                      <FormField
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Recipient&apos;s Name</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="Name or nickname"
+                              />
+                            </FormControl>
+                            <FormDescription>
+                              Enter your name or nickname.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                  <FormField
-                    name="relationship"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Relationship</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select their relationship to you" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {RELATIONSHIP_OPTIONS.map((option) => (
-                                <SelectItem key={option} value={option}>
-                                  {option}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormDescription>
-                          Describe your relationship.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    name="occasion"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Occasion</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select an occasion" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {OCCASION_OPTIONS.map((occasion) => (
-                                <SelectItem key={occasion} value={occasion}>
-                                  {occasion}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormDescription>
-                          Select the occasion for your song.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
-
-              {currentStep === 1 && (
-                <>
-                  <FormField
-                    name="genre"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Genre</FormLabel>
-                        <FormControl>
-                          <ToggleGroup
-                            type="single"
-                            value={field.value}
-                            onValueChange={field.onChange}
-                            className="flex flex-wrap justify-center gap-2"
-                          >
-                            {GENRE_OPTIONS.map((genre) => (
-                              <ToggleGroupItem
-                                key={genre}
-                                value={genre}
-                                className="capitalize rounded-lg border border-stone-300 px-6 py-3 data-[state=on]:bg-stone-900 data-[state=on]:text-white"
+                      <FormField
+                        name="relationship"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Relationship</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
                               >
-                                {genre}
-                              </ToggleGroupItem>
-                            ))}
-                          </ToggleGroup>
-                        </FormControl>
-                        <FormDescription>
-                          This is the foundation of your song.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select their relationship to you" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {RELATIONSHIP_OPTIONS.map((option) => (
+                                    <SelectItem key={option} value={option}>
+                                      {option}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormDescription>
+                              Describe your relationship.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                  <hr className="my-4 border-stone-200" />
-
-                  <FormField
-                    name="vocalStyle"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Vocal Style</FormLabel>
-                        <FormControl>
-                          <ToggleGroup
-                            type="single"
-                            value={field.value}
-                            onValueChange={field.onChange}
-                            className="flex flex-wrap justify-center gap-2"
-                          >
-                            {VOCAL_STYLE_OPTIONS.map((style) => (
-                              <ToggleGroupItem
-                                key={style}
-                                value={style}
-                                className="capitalize rounded-lg border border-stone-300 px-6 py-3 data-[state=on]:bg-stone-900 data-[state=on]:text-white"
+                      <FormField
+                        name="occasion"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Occasion</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
                               >
-                                {style}
-                              </ToggleGroupItem>
-                            ))}
-                          </ToggleGroup>
-                        </FormControl>
-                        <FormDescription>
-                          Choose your preferred vocal style.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select an occasion" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {OCCASION_OPTIONS.map((occasion) => (
+                                    <SelectItem key={occasion} value={occasion}>
+                                      {occasion}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormDescription>
+                              Select the occasion for your song.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
 
-                  <hr className="my-4 border-stone-200" />
-
-                  <FormField
-                    name="vibe"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Vibe</FormLabel>
-                        <FormControl>
-                          <ToggleGroup
-                            type="multiple"
-                            onValueChange={(value) => {
-                              if (value.length <= 2) {
-                                field.onChange(value);
-                              }
-                            }}
-                            value={field.value || []}
-                            className="flex flex-wrap gap-2"
-                          >
-                            {VIBE_OPTIONS.map((vibe) => (
-                              <ToggleGroupItem
-                                key={vibe}
-                                value={vibe}
-                                className="capitalize data-[state=on]:bg-stone-900 data-[state=on]:text-white rounded-lg border border-stone-300 px-6 py-3"
+                  {currentStep === (1 as StepId) && (
+                    <>
+                      <FormField
+                        name="genre"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Genre</FormLabel>
+                            <FormControl>
+                              <ToggleGroup
+                                type="single"
+                                value={field.value}
+                                onValueChange={field.onChange}
+                                className="flex flex-wrap justify-center gap-2"
                               >
-                                {vibe}
-                              </ToggleGroupItem>
-                            ))}
-                          </ToggleGroup>
-                        </FormControl>
-                        <FormDescription>
-                          Select up to 2 vibes for your song.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                                {GENRE_OPTIONS.map((genre) => (
+                                  <ToggleGroupItem
+                                    key={genre}
+                                    value={genre}
+                                    className="capitalize rounded-lg border border-stone-300 px-6 py-3 data-[state=on]:bg-stone-900 data-[state=on]:text-white"
+                                  >
+                                    {genre}
+                                  </ToggleGroupItem>
+                                ))}
+                              </ToggleGroup>
+                            </FormControl>
+                            <FormDescription>
+                              This is the foundation of your song.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                  <hr className="my-4 border-stone-200" />
+                      <hr className="my-4 border-stone-200" />
 
-                  <FormField
-                    name="tempo"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Tempo</FormLabel>
-                        <FormControl>
-                          <ToggleGroup
-                            type="single"
-                            onValueChange={field.onChange}
-                            value={field.value || "medium"}
-                            className="flex flex-wrap gap-2"
-                          >
-                            {TEMPO_OPTIONS.map((tempo) => (
-                              <ToggleGroupItem
-                                key={tempo}
-                                value={tempo}
-                                className="capitalize data-[state=on]:bg-stone-900 rounded-lg border border-stone-300 px-6 py-3 data-[state=on]:text-white"
+                      <FormField
+                        name="vocalStyle"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Vocal Style</FormLabel>
+                            <FormControl>
+                              <ToggleGroup
+                                type="single"
+                                value={field.value}
+                                onValueChange={field.onChange}
+                                className="flex flex-wrap justify-center gap-2"
                               >
-                                {tempo}
-                              </ToggleGroupItem>
-                            ))}
-                          </ToggleGroup>
-                        </FormControl>
-                        <FormDescription>
-                          Select the tempo for your song.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
+                                {VOCAL_STYLE_OPTIONS.map((style) => (
+                                  <ToggleGroupItem
+                                    key={style}
+                                    value={style}
+                                    className="capitalize rounded-lg border border-stone-300 px-6 py-3 data-[state=on]:bg-stone-900 data-[state=on]:text-white"
+                                  >
+                                    {style}
+                                  </ToggleGroupItem>
+                                ))}
+                              </ToggleGroup>
+                            </FormControl>
+                            <FormDescription>
+                              Choose your preferred vocal style.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-              {currentStep === 2 && (
-                <>
-                  <div className="space-y-4">
-                    {[0, 1].map((index) => (
-                      <div key={index} className="space-y-4">
-                        <FormField
-                          name={`promptType.${index}`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Select prompt {index + 1}</FormLabel>
-                              <FormControl>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  value={field.value}
-                                >
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select a prompt type" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {PROMPT_OPTIONS.map((option) => (
-                                      <SelectItem key={option} value={option}>
-                                        {option}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                      <hr className="my-4 border-stone-200" />
 
-                        <FormField
-                          name={`prompts.${index}`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormControl>
-                                <Textarea
-                                  {...field}
-                                  placeholder="Share your story here..."
-                                  className="min-h-[150px]"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                      <FormField
+                        name="vibe"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Vibe</FormLabel>
+                            <FormControl>
+                              <ToggleGroup
+                                type="multiple"
+                                onValueChange={(value) => {
+                                  if (value.length <= 2) {
+                                    field.onChange(value);
+                                  }
+                                }}
+                                value={field.value || []}
+                                className="flex flex-wrap gap-2"
+                              >
+                                {VIBE_OPTIONS.map((vibe) => (
+                                  <ToggleGroupItem
+                                    key={vibe}
+                                    value={vibe}
+                                    className="capitalize data-[state=on]:bg-stone-900 data-[state=on]:text-white rounded-lg border border-stone-300 px-6 py-3"
+                                  >
+                                    {vibe}
+                                  </ToggleGroupItem>
+                                ))}
+                              </ToggleGroup>
+                            </FormControl>
+                            <FormDescription>
+                              Select up to 2 vibes for your song.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <hr className="my-4 border-stone-200" />
+
+                      <FormField
+                        name="tempo"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Tempo</FormLabel>
+                            <FormControl>
+                              <ToggleGroup
+                                type="single"
+                                onValueChange={field.onChange}
+                                value={field.value || "medium"}
+                                className="flex flex-wrap gap-2"
+                              >
+                                {TEMPO_OPTIONS.map((tempo) => (
+                                  <ToggleGroupItem
+                                    key={tempo}
+                                    value={tempo}
+                                    className="capitalize data-[state=on]:bg-stone-900 rounded-lg border border-stone-300 px-6 py-3 data-[state=on]:text-white"
+                                  >
+                                    {tempo}
+                                  </ToggleGroupItem>
+                                ))}
+                              </ToggleGroup>
+                            </FormControl>
+                            <FormDescription>
+                              Select the tempo for your song.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+
+                  {currentStep === (2 as StepId) && (
+                    <>
+                      <div className="space-y-4">
+                        {[0, 1].map((index) => (
+                          <div key={index} className="space-y-4">
+                            <FormField
+                              name={`promptType.${index}`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>
+                                    Select prompt {index + 1}
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Select
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                    >
+                                      <SelectTrigger>
+                                        <SelectValue placeholder="Select a prompt type" />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        {PROMPT_OPTIONS.map((option) => (
+                                          <SelectItem
+                                            key={option}
+                                            value={option}
+                                          >
+                                            {option}
+                                          </SelectItem>
+                                        ))}
+                                      </SelectContent>
+                                    </Select>
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              name={`prompts.${index}`}
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormControl>
+                                    <Textarea
+                                      {...field}
+                                      placeholder="Share your story here..."
+                                      className="min-h-[150px]"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
 
-                  <FormField
-                    name="importantContext"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Important Context</FormLabel>
-                        <FormControl>
-                          <Input {...field} placeholder="Important Context" />
-                        </FormControl>
-                        <FormDescription>
-                          Add important context.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
+                      <FormField
+                        name="importantContext"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Important Context</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="Important Context"
+                              />
+                            </FormControl>
+                            <FormDescription>
+                              Add important context.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
 
-              {currentStep === 3 && (
-                <>
-                  <FormField
-                    name="deliveryTime"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Delivery Time</FormLabel>
-                        <FormControl>
-                          <ToggleGroup
-                            type="single"
-                            value={field.value || "normal"}
-                            onValueChange={field.onChange}
-                            className="flex flex-wrap gap-2"
-                          >
-                            <ToggleGroupItem
-                              value="normal"
-                              className="capitalize data-[state=on]:bg-stone-900 rounded-3xl border border-stone-300 px-6 py-8 data-[state=on]:text-white flex flex-col text-stone-900 data-[state=on]:shadow-lg"
-                            >
-                              <div className="font-bold ">Normal</div>
-                              <div className="text-sm data-[state=on]:text-white tabular-nums">
-                                7 days
-                              </div>
-                            </ToggleGroupItem>
-                            <ToggleGroupItem
-                              value="rush"
-                              className="capitalize data-[state=on]:bg-stone-900 rounded-3xl border border-stone-300 px-6 py-8 data-[state=on]:text-white data-[state=on]:shadow-lg flex flex-col text-stone-900"
-                            >
-                              <div className="font-bold">Rush</div>
-                              <div className="text-sm data-[state=on]:text-white tabular-nums">
-                                3 days
-                              </div>
-                            </ToggleGroupItem>
-                          </ToggleGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  {currentStep === (3 as StepId) && (
+                    <>
+                      <FormField
+                        name="deliveryTime"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Delivery Time</FormLabel>
+                            <FormControl>
+                              <ToggleGroup
+                                type="single"
+                                value={field.value || "normal"}
+                                onValueChange={field.onChange}
+                                className="flex flex-wrap gap-2"
+                              >
+                                <ToggleGroupItem
+                                  value="normal"
+                                  className="capitalize data-[state=on]:bg-stone-900 rounded-3xl border border-stone-300 px-6 py-8 data-[state=on]:text-white flex flex-col text-stone-900 data-[state=on]:shadow-lg"
+                                >
+                                  <div className="font-bold ">Normal</div>
+                                  <div className="text-sm data-[state=on]:text-white tabular-nums">
+                                    7 days
+                                  </div>
+                                </ToggleGroupItem>
+                                <ToggleGroupItem
+                                  value="rush"
+                                  className="capitalize data-[state=on]:bg-stone-900 rounded-3xl border border-stone-300 px-6 py-8 data-[state=on]:text-white data-[state=on]:shadow-lg flex flex-col text-stone-900"
+                                >
+                                  <div className="font-bold">Rush</div>
+                                  <div className="text-sm data-[state=on]:text-white tabular-nums">
+                                    3 days
+                                  </div>
+                                </ToggleGroupItem>
+                              </ToggleGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                  <p className="text-rose-500 text-center text-bold mt-12 text-lg">
-                    Song delivery rush fee: $25.00
-                  </p>
-                  <FormField
-                    name="length"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Length</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select length" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="short">Short</SelectItem>
-                              <SelectItem value="medium">Medium</SelectItem>
-                              <SelectItem value="long">Long</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormDescription>Select the length.</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      <p className="text-rose-500 text-center text-bold mt-12 text-lg">
+                        Song delivery rush fee: $25.00
+                      </p>
+                      <FormField
+                        name="length"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Length</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select length" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="short">Short</SelectItem>
+                                  <SelectItem value="medium">Medium</SelectItem>
+                                  <SelectItem value="long">Long</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormDescription>
+                              Select the length.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                  <FormField
-                    name="revisions"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Revisions</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            {...field}
-                            placeholder="Number of revisions"
-                            min="0"
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          Enter number of revisions.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
+                      <FormField
+                        name="revisions"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Revisions</FormLabel>
+                            <FormControl>
+                              <Input
+                                type="number"
+                                {...field}
+                                placeholder="Number of revisions"
+                                min="0"
+                              />
+                            </FormControl>
+                            <FormDescription>
+                              Enter number of revisions.
+                            </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+                </FormTransition>
+              </AnimatePresence>
             </form>
           </div>
 

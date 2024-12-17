@@ -1,6 +1,5 @@
 // Default delivery time is 1 week from today
-export const DELIVERY_TIME_DEFAULT = new Date();
-DELIVERY_TIME_DEFAULT.setDate(DELIVERY_TIME_DEFAULT.getDate() + 7);
+export const DELIVERY_OPTIONS = ["normal", "rush"] as const;
 
 // Default Song Object
 export const SONG_DEFAULT = {
@@ -17,7 +16,7 @@ export const SONG_DEFAULT = {
     importantContext: "",
   },
   options: {
-    deliveryTime: DELIVERY_TIME_DEFAULT,
+    deliveryTime: "normal" as const,
     length: "",
     revisions: 0,
   },

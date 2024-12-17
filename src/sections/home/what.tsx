@@ -75,7 +75,7 @@ const What = () => {
           <CTA />
           <div>
             <Link
-              href="/learn-more"
+              href="/product/original-song"
               className="inline-block text-gray-800 font-semibold hover:text-primary transition-colors text-sm tracking-wider"
             >
               LEARN MORE
