@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { SONG_DEFAULT } from "./constants";
-import { StoreState } from "./types";
+import type { StoreState } from "./types";
 import { STEPS } from "./constants";
 
 export const useStore = create<StoreState>()(
@@ -12,7 +12,20 @@ export const useStore = create<StoreState>()(
         totalSteps: STEPS.length,
         steps: STEPS,
 
-        song: { ...SONG_DEFAULT },
+        song: {
+          about: { ...SONG_DEFAULT.about },
+          tags: {
+            ...SONG_DEFAULT.tags,
+            vibe: [],
+            tempo: SONG_DEFAULT.tags.tempo,
+          },
+          story: {
+            ...SONG_DEFAULT.story,
+            promptType: [],
+            prompts: ["", ""],
+          },
+          options: { ...SONG_DEFAULT.options },
+        },
 
         nextStep: () =>
           set((state) => ({
@@ -38,7 +51,20 @@ export const useStore = create<StoreState>()(
         resetSong: () =>
           set(() => ({
             currentStep: 0,
-            song: { ...SONG_DEFAULT },
+            song: {
+              about: { ...SONG_DEFAULT.about },
+              tags: {
+                ...SONG_DEFAULT.tags,
+                vibe: [],
+                tempo: SONG_DEFAULT.tags.tempo,
+              },
+              story: {
+                ...SONG_DEFAULT.story,
+                promptType: [],
+                prompts: ["", ""],
+              },
+              options: { ...SONG_DEFAULT.options },
+            },
           })),
       }),
       {

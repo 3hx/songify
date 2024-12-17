@@ -29,9 +29,8 @@ export const storySchema = z.object({
 
 // Billing Step Validation Schema
 export const optionsSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email address" }),
   deliveryTime: z.enum(["normal", "rush"]),
-  length: z.string(),
-  revisions: z.number().min(0),
 });
 
 // Combine schemas for the entire form

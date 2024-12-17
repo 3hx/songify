@@ -3,7 +3,11 @@ export const DELIVERY_OPTIONS = ["normal", "rush"] as const;
 
 // Default Song Object
 export const SONG_DEFAULT = {
-  about: { name: "", relationship: "", occasion: "" },
+  about: {
+    name: "",
+    relationship: "",
+    occasion: "",
+  },
   tags: {
     genre: "",
     vocalStyle: "",
@@ -16,11 +20,10 @@ export const SONG_DEFAULT = {
     importantContext: "",
   },
   options: {
-    deliveryTime: "normal" as const,
-    length: "",
-    revisions: 0,
+    email: "",
+    deliveryTime: "normal" as "normal" | "rush",
   },
-};
+} as const;
 
 export const validSteps = ["about", "tags", "story", "options"] as const;
 
