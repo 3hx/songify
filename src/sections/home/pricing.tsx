@@ -1,13 +1,8 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { getCurrencyDetails } from "@/lib/utils/currency";
-import { getFormattedPrice } from "@/lib/stores/currencyStore";
-import { PRICES } from "@/lib/constants/prices";
+import { PriceDisplay } from "@/components/pricing/PriceDisplay";
 
-export async function Pricing() {
-  const currency = await getCurrencyDetails();
-  const formattedPrice = getFormattedPrice(PRICES.basePrice, currency);
-
+export function Pricing() {
   return (
     <section id="pricing" className="py-24 bg-stone-950 text-white">
       <div className="max-w-5xl mx-auto px-4">
@@ -39,9 +34,7 @@ export async function Pricing() {
           {/* Price Overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="bg-stone-950/80 px-12 py-8 rounded-2xl backdrop-blur-sm">
-              <div className="text-7xl font-bold text-white mb-2">
-                {formattedPrice}
-              </div>
+              <PriceDisplay />
               <div className="text-2xl text-white text-center font-medium">
                 per custom song
               </div>

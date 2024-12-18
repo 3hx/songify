@@ -1,24 +1,23 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCurrencyStore } from "@/lib/stores/currencyStore";
+import { getCurrencyDetails } from "@/lib/utils/currency";
 
-interface CurrencyDetails {
-  symbol: string;
-  code: string;
-  rate: number;
-}
-
-export function CurrencyInitializer({
-  currency,
-}: {
-  currency: CurrencyDetails;
-}) {
+export function CurrencyInitializer() {
   const setDetails = useCurrencyStore((state) => state.setDetails);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    setDetails(currency.symbol, currency.code, currency.rate);
-  }, [currency, setDetails]);
+    if (!isInitialized) {
+      async function init() {
+        const currency = await getCurrencyDetails();
+        setDetails(currency.symbol, currency.code, currency.rate);
+        setIsInitialized(true);
+      }
+      init();
+    }
+  }, [setDetails, isInitialized]);
 
   return null;
 }
