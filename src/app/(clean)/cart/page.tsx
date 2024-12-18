@@ -31,7 +31,7 @@ const stripePromise = loadStripe(
 
 export default function Cart() {
   const song = useStore((state: StoreState) => state.song);
-  const { symbol, rate } = useCurrencyStore();
+  const { symbol, rate, code } = useCurrencyStore();
   const isComplete =
     song.tags.genre && song.tags.vocalStyle && song.story.prompts;
 
@@ -40,7 +40,14 @@ export default function Cart() {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(song),
+        body: JSON.stringify({
+          song,
+          currency: {
+            symbol,
+            code,
+            rate,
+          },
+        }),
       });
 
       const { sessionId } = await response.json();
@@ -52,9 +59,11 @@ export default function Cart() {
 
       if (error) {
         console.error("Stripe error:", error);
+        // You might want to show an error toast here
       }
     } catch (err) {
       console.error("Checkout error:", err);
+      // You might want to show an error toast here
     }
   };
 
