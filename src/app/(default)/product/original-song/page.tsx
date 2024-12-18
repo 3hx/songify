@@ -4,9 +4,14 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Info, Clock, Music2 } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { useCurrencyStore } from "@/lib/stores/currencyStore";
+import { formatPrice } from "@/lib/utils/currency";
 
 export default function OriginalSong() {
   const router = useRouter();
+  const { symbol, rate } = useCurrencyStore();
+
+  const basePrice = 199.99;
 
   return (
     <>
@@ -31,9 +36,12 @@ export default function OriginalSong() {
           <div className="space-y-6">
             <h1 className="text-4xl font-bold">Original Song</h1>
             <div className="space-y-2">
-              <div className="text-3xl font-bold">$199.99</div>
-              <p className="text-gray-600">
-                or 4 interest-free payments of $50.00 with{" "}
+              <div className="text-3xl font-bold tabular-nums">
+                {formatPrice(basePrice, rate, symbol)}
+              </div>
+              <p className="text-gray-600 tabular-nums">
+                or 4 interest-free payments of{" "}
+                {formatPrice(basePrice / 4, rate, symbol)} with{" "}
                 <span className="font-semibold">klarna</span>
               </p>
             </div>

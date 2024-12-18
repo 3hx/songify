@@ -20,6 +20,10 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { motion, AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/SEO";
+import { CartTotal } from "@/components/cart/CartClient";
+import { PRICES } from "@/lib/constants/prices";
+import { getFormattedPrice } from "@/lib/stores/currencyStore";
+import { useCurrencyStore } from "@/lib/stores/currencyStore";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -27,6 +31,7 @@ const stripePromise = loadStripe(
 
 export default function Cart() {
   const song = useStore((state: StoreState) => state.song);
+  const { symbol, rate } = useCurrencyStore();
   const isComplete =
     song.tags.genre && song.tags.vocalStyle && song.story.prompts;
 
@@ -76,35 +81,38 @@ export default function Cart() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
+              className="max-w-2xl mx-auto"
             >
-              <h1 className="text-xl font-bold mb-6 mx-1.5">Your Cart</h1>
-              <motion.div
-                layout
-                className="flex flex-col lg:flex-row gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-stone-100 via-stone-50/80 to-stone-50/90 shadow-[0_0_1px_rgba(0,0,0,0.08),0_2px_12px_-3px_rgba(0,0,0,0.05)] border border-stone-100/80 hover:shadow-[0_0_1px_rgba(0,0,0,0.08),0_2px_16px_-4px_rgba(0,0,0,0.1)] transition-all duration-300"
-              >
-                <div className="relative group w-full lg:w-auto">
-                  <Image
-                    src="/stock-spanish-1.jpg"
-                    alt="Musicians on stage"
-                    width={100}
-                    height={100}
-                    className="rounded-xl sm:rounded-2xl object-cover w-full h-48 sm:h-56 lg:w-36 lg:h-36 transition-all duration-500 group-hover:scale-[1.02] shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)]"
-                  />
-                  <div className="absolute inset-0 rounded-xl sm:rounded-2xl ring-1 ring-inset ring-black/[0.03] bg-gradient-to-t from-black/5 to-black/2" />
-                </div>
+              <h1 className="text-2xl font-bold mb-6 mx-1.5">Your Cart</h1>
+              <div className="sticky top-4">
+                <motion.div
+                  layout
+                  className="flex flex-col lg:flex-row gap-4 sm:gap-6 p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-stone-100 via-stone-50/80 to-stone-50/90 shadow-[0_0_1px_rgba(0,0,0,0.08),0_2px_12px_-3px_rgba(0,0,0,0.05)] border border-stone-100/80 hover:shadow-[0_0_1px_rgba(0,0,0,0.08),0_2px_16px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 w-full"
+                >
+                  <div className="relative group w-full lg:w-auto">
+                    <Image
+                      src="/song.jpg"
+                      alt="Musicians on stage"
+                      width={302}
+                      height={200}
+                      className="rounded-xl sm:rounded-2xl object-cover w-full h-48 sm:h-56 lg:w-36 lg:h-36 transition-all duration-500 group-hover:scale-[1.02] shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1)]"
+                    />
+                    <div className="absolute inset-0 rounded-xl sm:rounded-2xl ring-1 ring-inset ring-black/[0.03] bg-gradient-to-t from-black/5 to-black/2" />
+                  </div>
 
-                <div className="flex-1 min-w-0 space-y-4 sm:space-y-5">
-                  <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-4">
-                    <div className="space-y-3 sm:space-y-4 w-full sm:w-auto">
-                      <div className="flex justify-between sm:block space-y-1.5">
-                        <h2 className="text-xl sm:text-2xl font-semibold text-stone-900">
-                          Original Song
-                        </h2>
-                        <div className="block sm:hidden text-xl font-semibold text-stone-900">
-                          $200
-                          <span className="text-base font-medium text-stone-600">
-                            .00
-                          </span>
+                  <div className="flex-1 min-w-0 space-y-3 sm:space-y-4">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-4">
+                      <div className="space-y-2 sm:space-y-3 w-full sm:w-auto">
+                        <div className="flex justify-between sm:block">
+                          <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-stone-900">
+                            Original Song
+                          </h2>
+                          <div className="block sm:hidden text-lg font-semibold text-stone-900 tabular-nums">
+                            {getFormattedPrice(PRICES.basePrice, {
+                              symbol,
+                              rate,
+                            })}
+                          </div>
                         </div>
                         <p className="text-sm text-stone-500">
                           A personalized song for{" "}
@@ -114,82 +122,82 @@ export default function Cart() {
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-1.5">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-stone-100/80 text-xs font-medium text-stone-800 ring-1 ring-stone-200/80">
-                          {song.tags.genre}
-                        </span>
-                        {song.tags.vibe.map((v) => (
-                          <span
-                            key={v}
-                            className="inline-flex items-center px-2.5 py-1 rounded-full bg-stone-100/80 text-xs font-medium text-stone-800 ring-1 ring-stone-200/80"
-                          >
-                            {v}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="flex gap-4 items-center text-[13px] text-stone-600 font-medium">
-                        <span className="inline-flex items-center gap-1.5">
-                          <div className="w-1 h-1 rounded-full bg-stone-400" />
-                          {song.tags.vocalStyle} vocals
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                          <div className="w-1 h-1 rounded-full bg-stone-400" />
-                          {song.tags.tempo} tempo
-                        </span>
+                      <div className="hidden sm:block text-xl lg:text-2xl font-bold text-stone-900 tabular-nums">
+                        {getFormattedPrice(PRICES.basePrice, { symbol, rate })}
                       </div>
                     </div>
 
-                    <div className="hidden sm:block text-2xl font-semibold text-stone-900">
-                      $200
-                      <span className="text-lg font-medium text-stone-600">
-                        .00
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-stone-100/80 text-xs font-medium text-stone-800 ring-1 ring-stone-200/80">
+                        {song.tags.genre}
+                      </span>
+                      {song.tags.vibe.map((v) => (
+                        <span
+                          key={v}
+                          className="inline-flex items-center px-2.5 py-1 rounded-full bg-stone-100/80 text-xs font-medium text-stone-800 ring-1 ring-stone-200/80"
+                        >
+                          {v}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-3 items-center text-[13px] text-stone-600 font-medium pt-1">
+                      <span className="inline-flex items-center gap-1.5">
+                        <div className="w-1 h-1 rounded-full bg-stone-400" />
+                        {song.tags.vocalStyle} vocals
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <div className="w-1 h-1 rounded-full bg-stone-400" />
+                        {song.tags.tempo} tempo
                       </span>
                     </div>
-                  </div>
 
-                  <div className="flex items-center gap-3 pt-2 sm:pt-3">
-                    <Link href="/create/options" className="w-full sm:w-auto">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-9 w-full sm:w-auto text-stone-600 hover:text-stone-900 hover:bg-stone-100/70 transition-colors duration-200 font-medium"
+                    <div className="flex items-center gap-2 pt-2 sm:pt-3">
+                      <Link
+                        href="/create/options"
+                        className="flex-1 sm:flex-none"
                       >
-                        Edit details
-                      </Button>
-                    </Link>
-                    <div className="hidden sm:block h-4 w-px bg-stone-200/70" />
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-9 w-full sm:w-auto text-stone-600 hover:text-red-600 hover:bg-red-50/80 transition-colors duration-200 font-medium"
+                          className="w-full sm:w-auto h-9 text-stone-600 hover:text-stone-900 hover:bg-stone-100/70 transition-colors duration-200 font-medium"
                         >
-                          Remove
+                          Edit details
                         </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Delete Song</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            Are you sure you want to remove this song from your
-                            cart?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => useStore.getState().resetSong()}
+                      </Link>
+                      <div className="hidden sm:block h-4 w-px bg-stone-200/70" />
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-9 w-full sm:w-auto text-stone-600 hover:text-red-600 hover:bg-red-50/80 transition-colors duration-200 font-medium"
                           >
-                            Delete
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                            Remove
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete Song</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to remove this song from
+                              your cart?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => useStore.getState().resetSong()}
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -231,7 +239,7 @@ export default function Cart() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="space-y-6 md:space-y-8 max-w-[400px] mx-auto md:mt-[100px]"
+            className="sticky top-4 space-y-6 md:space-y-8 max-w-[400px] mx-auto md:mt-[100px]"
           >
             <h3 className="font-bold text-2xl text-center">Order Details</h3>
 
@@ -246,13 +254,17 @@ export default function Cart() {
                 >
                   <div className="flex justify-between py-2 text-lg">
                     <span>Original Song</span>
-                    <span className="font-medium">$200.00</span>
+                    <span className="font-medium tabular-nums">
+                      {getFormattedPrice(PRICES.basePrice, { symbol, rate })}
+                    </span>
                   </div>
 
                   {song.options.deliveryTime === "rush" && (
                     <div className="flex justify-between py-2 text-lg">
                       <span>Rush Delivery</span>
-                      <span className="font-medium">$25.00</span>
+                      <span className="font-medium tabular-nums">
+                        {getFormattedPrice(PRICES.rushFee, { symbol, rate })}
+                      </span>
                     </div>
                   )}
                 </motion.div>
@@ -286,26 +298,7 @@ export default function Cart() {
               </Button>
             </div>
 
-            <div className="space-y-4 border-t pt-6">
-              <div className="flex justify-between py-2 text-lg">
-                <span>Subtotal</span>
-                <span className="font-medium">
-                  ${song.options.deliveryTime === "rush" ? "225.00" : "200.00"}
-                </span>
-              </div>
-              <div className="flex justify-between py-2 text-lg">
-                <span>Service Fee (5%)</span>
-                <span className="font-medium">
-                  ${song.options.deliveryTime === "rush" ? "11.25" : "10.00"}
-                </span>
-              </div>
-              <div className="flex justify-between py-2 text-2xl font-bold">
-                <span>Total</span>
-                <span>
-                  ${song.options.deliveryTime === "rush" ? "236.25" : "210.00"}
-                </span>
-              </div>
-            </div>
+            <CartTotal />
 
             <Button
               className="w-full rounded-full bg-blue-600 text-lg hover:bg-blue-700 py-7 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-stone-300 disabled:hover:bg-stone-300"

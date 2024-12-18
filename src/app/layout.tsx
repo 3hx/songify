@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { getCurrencyDetails } from "@/lib/utils/currency";
+import { CurrencyInitializer } from "@/components/CurrencyInitializer";
 
 const national = localFont({
   src: [
@@ -34,16 +36,20 @@ export const metadata: Metadata = {
     "Create personalized, custom songs for your loved ones. Professional artists turn your stories into unique musical gifts.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Get currency details on server
+  const currency = await getCurrencyDetails();
+
   return (
     <html lang="en">
       <body
         className={`${national.variable} antialiased h-screen overflow-x-hidden`}
       >
+        <CurrencyInitializer currency={currency} />
         <main className="w-full h-full">{children}</main>
       </body>
     </html>

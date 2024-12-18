@@ -58,6 +58,11 @@ import {
   GENRE_DESCRIPTIONS,
   TEMPO_DESCRIPTIONS,
 } from "@/constants/descriptions";
+import {
+  useCurrencyStore,
+  getFormattedPrice,
+} from "@/lib/stores/currencyStore";
+import { PRICES } from "@/lib/constants/prices";
 
 type StepData = {
   about: Song["about"];
@@ -182,6 +187,8 @@ function MultiStepForm() {
 
     setVisibleFields(fields);
   }, [song.tags.genre, song.tags.vocalStyle, song.tags.vibe]);
+
+  const { symbol, rate } = useCurrencyStore();
 
   return (
     <>
@@ -864,8 +871,12 @@ function MultiStepForm() {
                                       <div className="text-sm opacity-80 tabular-nums">
                                         3 days
                                       </div>
-                                      <div className="text-xs text-green-500 mt-1">
-                                        +$25.00
+                                      <div className="tabular-nums text-xs text-green-500 mt-1">
+                                        +
+                                        {getFormattedPrice(PRICES.rushFee, {
+                                          symbol,
+                                          rate,
+                                        })}
                                       </div>
                                     </ToggleGroupItem>
                                   </ToggleGroup>
