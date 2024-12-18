@@ -12,28 +12,35 @@ function SuccessContent() {
   const sessionId = searchParams.get("session_id");
 
   useEffect(() => {
-    // Reset the song form after successful payment
     resetSong();
   }, [resetSong]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f3f1eb]">
-      <div className="max-w-md w-full mx-auto p-8 bg-white rounded-xl shadow-sm">
-        <div className="text-center space-y-6">
-          <CheckCircle2 className="mx-auto h-12 w-12 text-green-500" />
-          <h1 className="text-2xl font-bold">Payment Successful!</h1>
-          <p className="text-gray-600">
-            Thank you for your order. We&apos;ll start working on your custom
-            song right away.
-          </p>
-          <div className="text-sm text-gray-500">
-            Order ID: {sessionId?.slice(0, 8)}
+    <div className="h-screen flex items-start py-12 md:py-32 justify-center bg-stone-50">
+      <div className="w-full max-w-sm bg-stone-100 p-8 border-stone-300">
+        <div className="space-y-6">
+          <div className="bg-green-50 w-16 h-16 mx-auto rounded-full flex items-center justify-center">
+            <CheckCircle2 className="h-8 w-8 text-green-600" />
           </div>
-          <div className="pt-6">
-            <Link href="/">
-              <Button className="w-full">Return Home</Button>
-            </Link>
+
+          <div className="space-y-3">
+            <h1 className="text-2xl font-semibold text-center text-stone-800">
+              Order Confirmed
+            </h1>
+            <p className="text-sm text-center text-stone-600">
+              We&apos;ll start working on your custom song right away.
+            </p>
           </div>
+
+          <div className="text-xs text-center bg-stone-50 py-2 rounded">
+            Order ID: {sessionId?.slice(-8)}
+          </div>
+
+          <Link href="/" className="block">
+            <Button className="w-full bg-stone-800 hover:bg-stone-700">
+              Return Home
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

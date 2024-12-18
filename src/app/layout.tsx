@@ -46,9 +46,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${national.variable} antialiased h-screen overflow-x-hidden`}
-      >
+      <body className={`${national.variable} antialiased overflow-x-hidden`}>
         <CurrencyInitializer currency={currency} />
         <main className="w-full h-full">{children}</main>
       </body>
