@@ -1,5 +1,8 @@
-const API_URL = "http://ip-api.com/json/?fields=currency";
-const EXCHANGE_API = "https://api.exchangerate-api.com/v4/latest/USD";
+// 1000 lifetime requests, if product is successful remember to update this with different implementation
+const API_URL =
+  "https://geo.ipify.org/api/v2/country?apiKey=at_Y6RHZ6YJmOY3hJi3PhdHRFqMUMKUs";
+const EXCHANGE_API =
+  "https://v6.exchangerate-api.com/v6/58b25aebd3660a429381f6f4/latest/USD";
 
 export async function getCurrencyDetails() {
   try {
@@ -23,6 +26,7 @@ export async function getCurrencyDetails() {
       rate: rates[currency] || 1,
     };
   } catch {
+    console.error("Failed to fetch currency details");
     return { code: "USD", symbol: "$", rate: 1 };
   }
 }
