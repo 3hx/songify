@@ -59,7 +59,26 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      animation: {
+        float: "float 3s ease-in-out infinite",
+      },
       keyframes: {
+        float: {
+          "0%, 100%": {
+            transform: "translateY(0) rotate(45deg)",
+          },
+          "50%": {
+            transform: "translateY(-10px) rotate(45deg)",
+          },
+        },
+        soundwave: {
+          "0%": { transform: "scaleY(0.6)" },
+          "100%": { transform: "scaleY(1)" },
+        },
+        wave: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(4px)" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -76,10 +95,6 @@ export default {
             height: "0",
           },
         },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },

@@ -25,6 +25,7 @@ import { PRICES } from "@/lib/constants/prices";
 import { getFormattedPrice } from "@/lib/stores/currencyStore";
 import { useCurrencyStore } from "@/lib/stores/currencyStore";
 import { useState } from "react";
+import { Logo } from "@/components/Logo";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -80,15 +81,7 @@ export default function Cart() {
       />
       <div className="w-full flex flex-col md:flex-row h-full gap-8 min-w-[320px]">
         <div className="w-full md:w-3/5 bg-[#f3f1eb] px-4 md:px-16 max-w-2xl md:max-w-none mx-auto space-y-3 md:space-y-8 py-3 md:py-12 md:border-r-2 border-[#f3f1eb] h-full min-w-[320px]">
-          <Link className="relative top-0 left-0 m-4" href="/">
-            <Image
-              src="/logo.png"
-              alt="Bill Logo"
-              width={40}
-              height={20}
-              className="mb-8"
-            />
-          </Link>
+          <Logo />
 
           {isComplete ? (
             <motion.div

@@ -8,20 +8,12 @@ import { CTA } from "@/components/ui/button";
 import { ShoppingCart, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
-import Image from "next/image";
+import { Logo3 } from "./Logo3";
 
 const NavBar = () => {
   return (
     <nav className="py-4 px-4 flex justify-between items-center">
-      <div className="flex-shrink-0">
-        <Link
-          href="/"
-          className="flex items-center gap-2 bg-primry p-4 rounded-xl"
-        >
-          <Image src="/logo.png" alt="Bill Logo" width={32} height={32} />
-          <span className="font-bold text-xl text-[#e36d34]">Songify</span>
-        </Link>
-      </div>
+      <Logo3 />
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex items-center gap-8">
@@ -30,7 +22,7 @@ const NavBar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/product/original-song"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 Learn
               </NavigationMenuLink>
@@ -39,7 +31,7 @@ const NavBar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/#pricing"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 Pricing
               </NavigationMenuLink>
@@ -47,7 +39,7 @@ const NavBar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/examples"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 Examples
               </NavigationMenuLink>
@@ -59,7 +51,7 @@ const NavBar = () => {
               {/* TODO: Add login */}
               <NavigationMenuLink
                 href="/product/original-song"
-                className="hover:text-orange-600 transition-colors"
+                className="hover:text-accent transition-colors"
               >
                 Login
               </NavigationMenuLink>
@@ -70,7 +62,7 @@ const NavBar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/cart"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 <div className="relative">
                   <div className="bg-white transition-colors shadow-sm p-3 rounded-full">
@@ -99,7 +91,7 @@ const NavBar = () => {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/cart"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 <div className="relative">
                   <div className="bg-white transition-colors shadow-sm p-3 rounded-full">
@@ -124,26 +116,26 @@ const NavBar = () => {
             <div className="flex flex-col gap-4 mt-8">
               <Link
                 href="/"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 Learn
               </Link>
               <Link
                 href="/#pricing"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 Pricing
               </Link>
               <Link
                 href="/examples"
-                className="font-bold hover:text-orange-600 transition-colors"
+                className="font-bold hover:text-accent transition-colors"
               >
                 Examples
               </Link>
               {/* TODO: Add login */}
               <Link
                 href="/product/original-song"
-                className="hover:text-orange-600 transition-colors"
+                className="hover:text-accent transition-colors"
               >
                 Login
               </Link>
