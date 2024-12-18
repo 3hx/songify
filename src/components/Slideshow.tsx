@@ -18,17 +18,17 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full ">
       <Carousel
         opts={{
           align: "center",
           containScroll: "trimSnaps",
         }}
-        className="w-full relative px-6 md:px-12"
+        className="w-full flex justify-center relative px-6 md:px-12"
       >
         <CarouselPrevious className="left-0 md:left-2" />
         <CarouselContent>
-          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 p-2 min-w-[280px] max-w-[400px]">
+          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 min-w-[280px] max-w-[400px]">
             <Card
               className="text-stone-700 bg-cover bg-center text-2xl md:text-4xl uppercase text-left p-4 md:p-6 h-full max-h-[500px]"
               style={{ backgroundImage: `url(${requirements.bg})` }}
@@ -50,7 +50,7 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
               </div>
             </Card>
           </CarouselItem>
-          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 p-2 min-w-[280px] max-w-[400px]">
+          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 min-w-[280px] max-w-[400px]">
             <Card
               style={{ backgroundImage: `url(${lyrics.bg})` }}
               className="text-stone-600 bg-cover bg-center text-2xl md:text-4xl font-extrabold text-left p-4 md:p-6 relative h-full max-h-[500px]"
@@ -83,20 +83,22 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
               </div>
             </Card>
           </CarouselItem>
-          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 p-2 min-w-[280px] max-w-[400px]">
+          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 min-w-[280px] max-w-[400px]">
             <Card
               onClick={() => setExpanded(!expanded)}
               className={`transition-all duration-300 h-full max-h-[500px] ${
-                expanded ? "fixed inset-0 z-50 m-4 md:m-12 max-h-none" : ""
+                expanded
+                  ? "fixed inset-0 z-50 max-w-4xl left-1/2 h-fit -translate-x-1/2 max-h-none"
+                  : "m-0"
               }`}
             >
               {expanded ? (
-                <div className="relative h-full">
+                <div className="relative h-96 w-auto">
                   <video
                     src={video.src}
                     controls
                     autoPlay
-                    className="w-full h-full object-contain"
+                    className="w-full object-cover"
                     onPause={() => setExpanded(false)}
                   />
                   <button
@@ -126,7 +128,7 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
                   </button>
                 </div>
               ) : (
-                <div className="relative h-full">
+                <div className="relative w-full h-full">
                   <img
                     src={video.img}
                     alt="Video thumbnail"
@@ -158,7 +160,7 @@ const Slideshow: React.FC<{ slide: Slide }> = ({
               )}
             </Card>
           </CarouselItem>
-          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 p-2 min-w-[280px] max-w-[400px]">
+          <CarouselItem className="basis-[90%] sm:basis-[45%] md:basis-1/4 min-w-[280px] max-w-[400px]">
             <Card className="bg-[#fffdf6] h-full max-h-[500px]">
               <div className="flex justify-center gap-2 md:gap-3 mt-4">
                 {[...Array(5)].map((_, i) => (

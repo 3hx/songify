@@ -34,14 +34,6 @@ const NavBar = () => {
 
             <NavigationMenuItem>
               <NavigationMenuLink
-                href="/"
-                className="font-bold hover:text-orange-600 transition-colors"
-              >
-                Artists
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink
                 href="/#pricing"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
@@ -60,8 +52,9 @@ const NavBar = () => {
               <div className="h-6 w-[1px] bg-gray-300" />
             </NavigationMenuItem>
             <NavigationMenuItem>
+              {/* TODO: Add login */}
               <NavigationMenuLink
-                href="/login"
+                href="/product/original-song"
                 className="hover:text-orange-600 transition-colors"
               >
                 Login
@@ -132,12 +125,6 @@ const NavBar = () => {
                 Learn
               </Link>
               <Link
-                href="/"
-                className="font-bold hover:text-orange-600 transition-colors"
-              >
-                Artists
-              </Link>
-              <Link
                 href="/#pricing"
                 className="font-bold hover:text-orange-600 transition-colors"
               >
@@ -149,8 +136,9 @@ const NavBar = () => {
               >
                 Examples
               </Link>
+              {/* TODO: Add login */}
               <Link
-                href="/login"
+                href="/product/original-song"
                 className="hover:text-orange-600 transition-colors"
               >
                 Login

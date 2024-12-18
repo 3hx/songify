@@ -29,9 +29,9 @@ const national = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Bill",
+  title: "Songify",
   description:
-    "Bill is a platform for creating custom songs for your loved ones.",
+    "Create personalized, custom songs for your loved ones. Professional artists turn your stories into unique musical gifts.",
 };
 
 export default function RootLayout({

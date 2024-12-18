@@ -6,19 +6,20 @@ export type Tag =
   | "My girlfriend";
 
 export interface Slide {
-  requirements: {
-    text: string;
-    bg: string;
-  };
   lyrics: {
     text: string;
     bg: string;
   };
+  requirements: {
+    text: string;
+    bg: string;
+  };
+  review: string;
   video: {
     src: string;
     img: string;
   };
-  review: string;
+  audio: string;
 }
 
 export const SLIDES: Record<Tag, Slide> = {
@@ -36,6 +37,7 @@ export const SLIDES: Record<Tag, Slide> = {
       img: "https://content.songfinch.com/res/songfinch/image/upload/content-files/dk6eelvsth0q5pypyrqu/1703070791.jpg?format=auto&width=615",
     },
     review: "The perfect birthday gift. She cried happy tears!",
+    audio: "daughter.mp3",
   },
   "My friend": {
     requirements: {
@@ -51,6 +53,7 @@ export const SLIDES: Record<Tag, Slide> = {
       img: "https://content.songfinch.com/res/songfinch/image/upload/content-files/ndqqxpaadswfscyxd0kc/1703070888.jpg?format=auto&width=615",
     },
     review: "Captured our friendship perfectly!",
+    audio: "friend.mp3",
   },
   "My partner": {
     requirements: {
@@ -66,6 +69,7 @@ export const SLIDES: Record<Tag, Slide> = {
       img: "https://content.songfinch.com/res/songfinch/image/upload/content-files/r7mki1bijxvtso2nsmmg/1703070932.jpg?format=auto&width=615",
     },
     review: "The most meaningful anniversary gift ever",
+    audio: "partner.mp3",
   },
   "My mother": {
     requirements: {
@@ -81,6 +85,7 @@ export const SLIDES: Record<Tag, Slide> = {
       img: "https://content.songfinch.com/res/songfinch/image/upload/content-files/apwq1m7zuz11matgasa4/1703070972.jpg?format=auto&width=615",
     },
     review: "Mom couldn't stop crying. Thank you!",
+    audio: "mother.mp3",
   },
   "My girlfriend": {
     requirements: {
@@ -96,6 +101,7 @@ export const SLIDES: Record<Tag, Slide> = {
       img: "https://content.songfinch.com/res/songfinch/image/upload/content-files/qqzqbglulc6qv1xyddju/1703071021.jpg?format=auto&width=615",
     },
     review: "She said yes when I proposed with this song!",
+    audio: "girlfriend.mp3",
   },
 };
 

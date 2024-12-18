@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Pricing() {
   return (
-    <section className="py-24 bg-stone-950 text-white">
+    <section id="pricing" className="py-24 bg-stone-950 text-white">
       <div className="max-w-5xl mx-auto px-4">
         {/* Title */}
         <div className="text-center mb-16">
