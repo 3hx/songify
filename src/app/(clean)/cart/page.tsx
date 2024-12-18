@@ -24,6 +24,7 @@ import { CartTotal } from "@/components/cart/CartClient";
 import { PRICES } from "@/lib/constants/prices";
 import { getFormattedPrice } from "@/lib/stores/currencyStore";
 import { useCurrencyStore } from "@/lib/stores/currencyStore";
+import { useState } from "react";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -34,8 +35,10 @@ export default function Cart() {
   const { symbol, rate, code } = useCurrencyStore();
   const isComplete =
     song.tags.genre && song.tags.vocalStyle && song.story.prompts;
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckout = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
@@ -64,6 +67,8 @@ export default function Cart() {
     } catch (err) {
       console.error("Checkout error:", err);
       // You might want to show an error toast here
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -312,11 +317,39 @@ export default function Cart() {
             <Button
               className="w-full rounded-full bg-blue-600 text-lg hover:bg-blue-700 py-7 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-stone-300 disabled:hover:bg-stone-300"
               size="lg"
-              disabled={!isComplete}
+              disabled={!isComplete || isLoading}
               onClick={handleCheckout}
             >
-              <LockKeyhole className="mr-2 h-5 w-5" />
-              Secure Checkout
+              {isLoading ? (
+                <span className="flex items-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : (
+                <>
+                  <LockKeyhole className="mr-2 h-5 w-5" />
+                  Secure Checkout
+                </>
+              )}
             </Button>
 
             <div className="flex items-center justify-center mt-4">

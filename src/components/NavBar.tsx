@@ -14,8 +14,12 @@ const NavBar = () => {
   return (
     <nav className="py-4 px-4 flex justify-between items-center">
       <div className="flex-shrink-0">
-        <Link href="/" className="flex items-center">
+        <Link
+          href="/"
+          className="flex items-center gap-2 bg-primry p-4 rounded-xl"
+        >
           <Image src="/logo.png" alt="Bill Logo" width={32} height={32} />
+          <span className="font-bold text-xl text-[#e36d34]">Songify</span>
         </Link>
       </div>
 
